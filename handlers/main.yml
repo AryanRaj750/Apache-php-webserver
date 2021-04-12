@@ -1,0 +1,11 @@
+---
+- name: update_port
+  service:
+        name: httpd
+        state: restarted
+        enabled: true
+- name: webconfig
+  service:
+        name: httpd
+        state: restarted
+        enabled: true

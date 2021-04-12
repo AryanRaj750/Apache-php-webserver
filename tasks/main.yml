@@ -1,0 +1,26 @@
+---
+- name: "apache webserver install"
+  package:
+      name: httpd
+      state: present
+- name: "install php"
+  package:
+      name: php
+      state: present
+- name: "Configure Apache webserver"
+  copy:
+      src: "index.php"
+      dest: "/var/www/html"
+  register: config
+- name: "start webserver"
+  service:
+      name: httpd
+      state: restarted
+      enabled: true
+  notify: webconfig
+- name: "httpd port number {{port_no}}"
+  lineinfile:
+      path: "/etc/httpd/conf/httpd.conf"
+      regexp: "^Listen"
+      line: "Listen {{port_no}}"
+  notify: update_port
