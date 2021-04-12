@@ -18,9 +18,9 @@
       state: restarted
       enabled: true
   notify: webconfig
-- name: "httpd port number {{port_no}}"
+- name: "httpd port number {{ port_no }}"
   lineinfile:
       path: "/etc/httpd/conf/httpd.conf"
       regexp: "^Listen"
-      line: "Listen {{port_no}}"
+      line: "Listen {{ port_no }}"
   notify: update_port
